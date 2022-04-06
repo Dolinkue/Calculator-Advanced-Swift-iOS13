@@ -22,6 +22,26 @@ class ViewController: UIViewController {
     
         isFinishedTypingNumber = true
         
+        // guard para prevenir error por nill en number
+        guard let number = Double(displayLabel.text!) else {
+            fatalError()
+        }
+        
+        if let calcMethod = sender.currentTitle {
+            if calcMethod == "+/-" {
+                displayLabel.text = String(number * -1)
+                
+            }
+            if calcMethod == "%" {
+                displayLabel.text = String(number / 100)
+            }
+            if calcMethod == "AC" {
+                displayLabel.text = String(number * 0)
+            }
+            
+        }
+        
+        
         
     }
 
@@ -38,6 +58,20 @@ class ViewController: UIViewController {
                 isFinishedTypingNumber = false
                 
             }else {
+                
+                guard let currentDisplayValue = Double(displayLabel.text!) else {
+                    fatalError()
+                }
+                // para no dejar que puedan ingresar mas de  un .
+                if numValue == "." {
+                    
+                    let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    
+                    if !isInt {
+                        return
+                    }
+                }
+                
                 displayLabel.text = displayLabel.text! + numValue
                 
             }
