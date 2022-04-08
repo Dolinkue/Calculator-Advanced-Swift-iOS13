@@ -10,29 +10,58 @@ import Foundation
 
 struct CalculatorLogic {
     
-    var number: Double
+    private var number: Double?
     
-    init(number: Double){
+    private var intermediateCalculation: (num1: Double, calcMethod: String)?
+    
+    mutating func setNumber(_ number: Double) {
+    
         self.number = number
+    
     }
     
-    func Calculo(symbol: String) -> Double? {
+    
+    mutating func Calculo(symbol: String) -> Double? {
        
         
-        
+        if let n = number {
             if symbol == "+/-" {
-               return number * -1
+               return n * -1
                 
             }
             else if symbol == "%" {
-               return number * 0.01
+               return n * 0.01
             }
             else if symbol == "AC" {
-                return number * 0
+                return n * 0
             }
             
+            else if symbol == "=" {
+                performTwoCalculation(n2: n)
+                
+            }
+            else {
+                
+                intermediateCalculation = (num1: n, calcMethod: symbol)
+            
+            }
+        }
+        
         return nil
         
+        }
+    
+    private func performTwoCalculation(n2: Double) -> Double {
+        
+        if let n1 = intermediateCalculation?.num1, let operation = intermediateCalculation?.calcMethod {
+            if operation == "+" {
+                return n1 + n2
+            }
+            
+        }
+    }
+    
+    
     }
     
   
@@ -40,4 +69,4 @@ struct CalculatorLogic {
     
     
     
-}
+

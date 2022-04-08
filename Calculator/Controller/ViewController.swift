@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         }
     }
     
+    private var calculo = CalculatorLogic()
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
@@ -43,7 +44,9 @@ class ViewController: UIViewController {
        
         if let calcMethod = sender.currentTitle {
            
-             let calculo = CalculatorLogic(number: displaValue)
+            
+            //cuando un calculo es precionado set el numero
+            calculo.setNumber(displaValue)
             
             displaValue = calculo.Calculo(symbol: calcMethod)!
         }
