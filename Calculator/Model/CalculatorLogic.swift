@@ -37,7 +37,7 @@ struct CalculatorLogic {
             }
             
             else if symbol == "=" {
-                performTwoCalculation(n2: n)
+                return performTwoCalculation(n2: n)
                 
             }
             else {
@@ -51,14 +51,30 @@ struct CalculatorLogic {
         
         }
     
-    private func performTwoCalculation(n2: Double) -> Double {
+    private func performTwoCalculation(n2: Double) -> Double? {
         
-        if let n1 = intermediateCalculation?.num1, let operation = intermediateCalculation?.calcMethod {
-            if operation == "+" {
-                return n1 + n2
-            }
+        if let n1 = intermediateCalculation?.num1,
+            let operation = intermediateCalculation?.calcMethod {
             
+            
+            
+            switch operation {
+             case "+":
+                return n1 + n2
+             case "-":
+                return n1 - n2
+            case "÷":
+                return n1 / n2
+            case "×":
+                return n1 * n2
+                
+                
+            default:
+                fatalError()
+            }
         }
+        
+        return nil
     }
     
     

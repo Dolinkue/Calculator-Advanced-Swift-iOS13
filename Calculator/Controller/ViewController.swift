@@ -41,14 +41,16 @@ class ViewController: UIViewController {
         //What should happen when a non-number button is pressed
     
         isFinishedTypingNumber = true
+        //cuando un calculo es precionado set el numero
+        calculo.setNumber(displaValue)
        
         if let calcMethod = sender.currentTitle {
            
+            if let result = calculo.Calculo(symbol: calcMethod)  {
+                displaValue = result
+            }
+           
             
-            //cuando un calculo es precionado set el numero
-            calculo.setNumber(displaValue)
-            
-            displaValue = calculo.Calculo(symbol: calcMethod)!
         }
         
         
